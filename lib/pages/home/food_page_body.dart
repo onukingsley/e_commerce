@@ -3,6 +3,7 @@ import 'package:e_commerce/controllers/popular_product_controller.dart';
 import 'package:e_commerce/controllers/recommended_product_controller.dart';
 import 'package:e_commerce/models/popular_product.dart';
 import 'package:e_commerce/models/recommended_product.dart';
+import 'package:e_commerce/routes/route_helper.dart';
 import 'package:e_commerce/utils/colors.dart';
 import 'package:e_commerce/utils/dimensions.dart';
 import 'package:e_commerce/widgets/big_text.dart';
@@ -92,7 +93,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             SizedBox(
               width: Dimensions.width10,
             ),
-            SmallText(text: 'Food Paring'),
+            SmallText(
+              text: 'Food Paring',
+              overflow: TextOverflow.ellipsis,
+            ),
           ]),
         ),
         GetBuilder<RecommendedProductController>(builder: (recommendedproduct) {
@@ -117,6 +121,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius20),
                               image: DecorationImage(
+                                  fit: BoxFit.cover,
                                   image: NetworkImage(
                                       'http://mvs.bslmeiyu.com/uploads/' +
                                           recommendedproduct
@@ -131,12 +136,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   BigText(
+                                    size: Dimensions.font20,
                                     text: recommendedproduct
                                         .recommendedList[position].name!,
                                     color: AppColors.titleColor,
                                   ),
                                   SizedBox(height: Dimensions.height15),
                                   SmallText(
+                                      overflow: TextOverflow.ellipsis,
                                       text: recommendedproduct
                                           .recommendedList[position].location!),
                                   SizedBox(
@@ -208,16 +215,21 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(left: 10, right: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                color: index.isEven ? Color(0xFFffd379) : Color(0xFFfcab88),
-                image: DecorationImage(
-                    image: NetworkImage('http://mvs.bslmeiyu.com/uploads/' +
-                        popularProductList.img!),
-                    fit: BoxFit.cover)),
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(left: 10, right: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                  color: index.isEven ? Color(0xFFffd379) : Color(0xFFfcab88),
+                  image: DecorationImage(
+                      image: NetworkImage('http://mvs.bslmeiyu.com/uploads/' +
+                          popularProductList.img!),
+                      fit: BoxFit.cover)),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -254,11 +266,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       color: AppColors.mainColor, size: 15)),
                             ),
                             SizedBox(width: Dimensions.height20),
-                            SmallText(text: "4.5"),
+                            SmallText(
+                                text: "4.5", overflow: TextOverflow.ellipsis),
                             SizedBox(width: 10),
-                            SmallText(text: '1287'),
+                            SmallText(
+                                text: '1287', overflow: TextOverflow.ellipsis),
                             SizedBox(width: 10),
-                            SmallText(text: 'comments')
+                            SmallText(
+                                text: 'comments',
+                                overflow: TextOverflow.ellipsis)
                           ],
                         ),
                         SizedBox(

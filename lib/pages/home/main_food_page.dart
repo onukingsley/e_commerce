@@ -34,7 +34,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
                               text: "Bangaladash", color: AppColors.mainColor),
                           Row(
                             children: [
-                              SmallText(text: "Narsingdi"),
+                              SmallText(
+                                text: "Narsingdi",
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               Icon(Icons.arrow_drop_down_rounded)
                             ],
                           )

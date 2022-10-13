@@ -26,6 +26,7 @@ class IconAndTextWidget extends StatelessWidget {
           width: 5,
         ),
         SmallText(
+          overflow: TextOverflow.ellipsis,
           text: text,
         )
       ],

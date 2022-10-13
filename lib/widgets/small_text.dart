@@ -14,15 +14,18 @@ class SmallText extends StatelessWidget {
       {super.key,
       required this.text,
       this.color = const Color(0xFFccc7c5),
-      this.overflow = TextOverflow.ellipsis,
+      this.overflow = TextOverflow.fade,
       this.height = 1.2,
       this.size = 12});
 
   @override
   Widget build(BuildContext context) {
     return Text(text,
-        maxLines: 1,
         overflow: overflow,
-        style: TextStyle(color: color, fontSize: size, fontFamily: 'Roboto'));
+        style: TextStyle(
+            color: color,
+            fontSize: size,
+            fontFamily: 'Roboto',
+            height: height));
   }
 }
