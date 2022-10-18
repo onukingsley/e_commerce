@@ -46,4 +46,16 @@ class CartController extends GetxController {
       return false;
     }
   }
+
+int getQuantity(Products product){
+  var quantity = 0;
+  if (_items.containsKey(product.id!)){
+    _items.forEach((key, value) {
+      if(key == product.id!){
+        quantity = value.quantity!;
+      }
+    });
+  }
+  return quantity;
+}
 }

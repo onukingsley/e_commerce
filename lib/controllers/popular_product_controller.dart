@@ -19,7 +19,7 @@ class PopularProductController extends GetxController {
   int _quantity = 0;
   int get quantity => _quantity;
   int _inCartItems = 0;
-  int get inCartItems => _inCartItems + quantity;
+  int get inCartItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
@@ -66,13 +66,19 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(CartController cart, Products products) {
     _quantity = 0;
     _inCartItems = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.existInCart(products);
+    if (exist) {
+      _inCartItems = _cart.getQuantity(products);
+    }
   }
 
   void addItem(Products product) {
+    print("added to cart");
     if (_quantity > 0) {
       _cart.addItem(product, _quantity);
       _quantity = 0;
